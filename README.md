@@ -1,19 +1,13 @@
-# 🚀 DevHub
+#  DevHub
 
 > Projet d'apprentissage Node.js + React, full-stack de A à Z.
 
-## 📁 Structure
+##  Structure
 
-```
-devhub/
-├── backend/        ← API Node.js (port 3001)
-├── frontend/       ← React + Vite (port 5173)
-└── README.md
-```
 
-## 🚀 Démarrage rapide
+## Démarrage rapide
 
-Tu dois lancer **deux terminaux**, un pour chaque serveur :
+
 
 ### Terminal 1 — Backend
 
@@ -22,26 +16,14 @@ cd backend
 npm run dev    # serveur sur http://localhost:3001
 ```
 
-### Terminal 2 — Frontend
-
 ```bash
 cd frontend
 npm install    # uniquement la première fois
 npm run dev    # app sur http://localhost:5173
 ```
 
-Ouvre ensuite http://localhost:5173 dans ton navigateur.
+Ouvre ensuite http://localhost:5173 .
 
-## 🗺️ Roadmap
-
-- [x] **Phase 1** — HTTP natif backend + React qui consomme l'API
-- [ ] **Phase 2** — Express + persistance fichier + CRUD complet front
-- [ ] **Phase 3** — React Router + structure MVC backend
-- [ ] **Phase 4** — PostgreSQL + Prisma
-- [ ] **Phase 5** — Authentification (JWT, OAuth GitHub)
-- [ ] **Phase 6** — Profils, follows, likes, commentaires
-- [ ] **Phase 7** — Socket.io (chat + notifications temps réel)
-- [ ] **Phase 8** — Tests, sécurité, optimisations, déploiement
 
 
 
