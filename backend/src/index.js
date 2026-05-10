@@ -1,36 +1,78 @@
-const http = require('http')
+const express = require('express');
+const {getPosts , ecrirePosts} = require('./posts')
 
+const app= express()
 const PORT = 3001
 
-const server = http.createServer((req, res) => {
-  const url = req.url
-  const method = req.method
+app.use(express.json())
+app.use((req , res , next)=> {
 
-  // En-têtes communs à toutes les réponses
-  res.setHeader('Content-Type', 'application/json')
   res.setHeader('Access-Control-Allow-Origin', '*')
-
-  if (method === 'GET' && url === '/') {
-    res.writeHead(200)
-    res.end(JSON.stringify({ message: 'Bienvenue sur DevHub API' }))
-    return
-  }
-
-  if (method === 'GET' && url === '/api/posts') {
-    const posts = [
-      { id: 1, title: 'Apprendre Node.js', author: 'Hamid' },
-      { id: 2, title: 'React de zéro', author: 'Hamid' },
-    ]
-    res.writeHead(200)
-    res.end(JSON.stringify(posts))
-    return
-  }
-
-  // Route inconnue → 404
-  res.writeHead(404)
-  res.end(JSON.stringify({ error: 'Route introuvable' }))
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  next()
 })
 
-server.listen(PORT, () => {
-  console.log(`Serveur lancé sur http://localhost:${PORT}`)
+
+//read all
+app.get('/api/posts', (req , res) => {
+  const posts = getPosts()
+  res.json(posts)
+})
+
+//read one 
+app.get('/api/posts/:id', (req , res) => {
+  const posts = getPosts()
+  const post = posts.find(p=> p.id === parseInt(req.params.id))
+  if (!post) {
+    res.status(404).json({ error: 'Post non trouvé' })
+    return
+  }
+  res.json(post)
+})
+
+//Create 
+
+app.post('/api/posts' , (req , res) => {
+  const posts = getPosts()
+  const newPost = {
+    id : Date.now(),
+    title : req.body.title , 
+    author : req.body.author 
+  }
+  posts.push(newPost)
+
+  ecrirePosts(posts)
+  res.status(201).json(newPost)
+})
+
+//update 
+app.put('/api/posts/:id' , (req , res ) => {
+  const posts = getPosts()
+  const index = posts.findIndex(p => p.id === parseInt(req.params.id))
+   if(index === -1){
+    return res.status(404).json({error : "Post non trouvé"})
+   }
+  
+   posts[index] = {
+   ...posts[index], ...req.body 
+   }
+   ecrirePosts(posts)
+   res.json(posts[index])
+})
+
+//delete 
+app.delete('/api/posts/:id' , (req , res) => {
+  const posts = getPosts()
+  const index = posts.findIndex(p => p.id === parseInt(req.params.id))
+  if(index === -1){
+    return res.status(404).json({error : "Post non trouvé"})
+  }
+  const deletedPosts = posts.splice(index , 1)
+  ecrirePosts(posts)
+  res.json(deletedPosts[0])
+})
+
+app.listen(PORT , ()=> {
+  console.log(`Server is running on port ${PORT}`)
 })
