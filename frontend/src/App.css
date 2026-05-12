@@ -231,3 +231,59 @@
 .modal-actions button[type="submit"]:hover {
   background: var(--amber-dark);
 }
+/* LIEN TITRE */
+.post-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.45;
+  margin-top: 0.15rem;
+  display: block;
+}
+
+.post-title:hover {
+  color: var(--amber-dark);
+}
+
+/* PAGE DÉTAIL */
+.post-detail {
+  max-width: 680px;
+  margin: 3rem auto;
+  padding: 0 2.5rem;
+}
+
+.post-detail-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--amber-dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-back:hover {
+  text-decoration: underline;
+}
+
+.page-status {
+  text-align: center;
+  margin-top: 4rem;
+  color: var(--text-secondary);
+}
+
+.page-header {
+  max-width: 1080px;
+  margin: 2rem auto 0;
+  padding: 0 2.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
