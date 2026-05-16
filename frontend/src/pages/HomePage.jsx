@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import PostCard from '../components/PostCard'
 import PostForm from '../components/PostForm'
-
+import {useAuth} from '../context/AuthContext'
 
 
 const API = "http://localhost:3001/api/posts"
@@ -10,6 +10,7 @@ function HomePage() {
   const [showForm , setShowForm] = useState(false)
   const [postAModifier , setPostAModifier] = useState(null)
  
+  const { token, user } = useAuth()
 
   useEffect(() => {
     fetch(API)
@@ -20,7 +21,9 @@ function HomePage() {
   function handleCreate(post){
     fetch(API , {
       method : 'POST', 
-      headers : { 'content-type' : 'application/json' },
+      headers : { 'content-type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+       },
       body : JSON.stringify(post)
     })
     .then(res =>res.json())
@@ -33,7 +36,9 @@ function HomePage() {
   function handleUpdate(post){
     fetch(`${API}/${postAModifier._id}`, {
       method : 'PUT', 
-      headers : { 'content-type' : 'application/json'} , 
+      headers : { 'content-type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+      } , 
       body : JSON.stringify(post)
     })
     .then(res => res.json())
@@ -46,11 +51,12 @@ function HomePage() {
   }
   function handleDelete(id){
     fetch(`${API}/${id}`, {
-      method : 'DELETE'
+      method : 'DELETE', 
+      headers : { 'Authorization' : `Bearer ${token}` }
     })
-    .then( () => {
+    .then(res => {
+      if (!res.ok) return
       setPosts(posts.filter(p => p._id !== id))
-
     })
   }
 
@@ -75,9 +81,11 @@ function handleSubmit(data) {
  return (
   <>
   <div className='post-header'>
-    <button className="btn-new" onClick={() => setShowForm(true)}>
-      + Nouveau post
-    </button>
+    {user && (
+      <button className="btn-new" onClick={() => setShowForm(true)}>
+        + Nouveau post
+      </button>
+    )}
   </div>
     <main className="posts-grid">
       {posts.map((post) => (

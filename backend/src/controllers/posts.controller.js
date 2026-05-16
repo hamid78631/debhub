@@ -40,4 +40,22 @@ async function removePost(req, res){
     res.json({message : "Post supprimé avec succès "})
 }
 
-module.exports = { getAllPosts , getOne , createPost , updatePost , removePost }
+async function toggleLike( req , res){
+    const post = await Post.findById(req.params.id)
+    if(!post) return res.status(404).json({error : "Post non trouvé!"})
+
+    const userId = req.user.userId
+    const alreadyLiked = post.likes.includes(userId)
+
+    if(alreadyLiked ){
+        post.likes = post.likes.filter( id => id.toString() !== userId)
+    }else {
+        post.likes.push(userId)
+    }
+
+    await post.save()
+    res.json(post)
+
+}
+
+module.exports = { getAllPosts , getOne , createPost , updatePost , removePost , toggleLike }

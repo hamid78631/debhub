@@ -108,9 +108,6 @@
 .post-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
 }
 
 .btn-edit,
@@ -141,6 +138,49 @@
 
 .btn-delete:hover {
   background: #F5F5F5;
+}
+
+/* ─── LIKE & FOOTER CARTE ────────────────────────────────── */
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-like:hover:not(:disabled) {
+  border-color: var(--amber);
+  color: var(--amber-dark);
+  background: #FEF9C3;
+}
+
+.btn-like.liked {
+  border-color: var(--amber);
+  color: var(--amber-dark);
+  background: #FEF9C3;
+}
+
+.btn-like:disabled {
+  cursor: default;
+  opacity: 0.6;
 }
 
 /* ─── MODAL ───────────────────────────────────────────────── */
@@ -248,26 +288,132 @@
 
 /* PAGE DÉTAIL */
 .post-detail {
-  max-width: 680px;
+  max-width: 720px;
   margin: 3rem auto;
-  padding: 0 2.5rem;
+  padding: 0 2rem 4rem;
 }
 
-.post-detail-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 1.5rem 0 1rem;
+.post-detail h1 {
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.post-detail .post-author {
+  margin-bottom: 2rem;
+}
+
+.post-content {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding: 1.5rem;
+  background: #FAFAFA;
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-bottom: 3rem;
+}
+
+.post-detail h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.comments-lists {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.comments-lists li {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.comments-lists li strong {
+  color: var(--amber-dark);
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.comment-form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 110px;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: #FAFAFA;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  line-height: 1.6;
+}
+
+.comment-form textarea:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
+}
+
+.comment-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.comment-form button {
+  align-self: flex-end;
+  background: var(--amber);
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.comment-form button:hover {
+  background: var(--amber-dark);
 }
 
 .btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   background: none;
   border: none;
   color: var(--amber-dark);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   cursor: pointer;
   padding: 0;
+  margin-bottom: 1.5rem;
 }
 
 .btn-back:hover {
@@ -286,4 +432,129 @@
   padding: 0 2.5rem;
   display: flex;
   justify-content: flex-end;
+}
+
+/* AUTH */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+}
+
+.auth-card {
+  background: #ffffff;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.auth-card input {
+  display: block;
+  width: 100%;
+  background: #FAFAFA;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.auth-card input:focus {
+  border-color: var(--amber);
+}
+
+.auth-card button[type="submit"] {
+  width: 100%;
+  background: var(--amber);
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-card button[type="submit"]:hover {
+  background: var(--amber-dark);
+}
+
+.auth-error {
+  color: #DC2626;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  background: #FEF2F2;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.auth-link a {
+  color: var(--amber-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* NAV */
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--amber-dark);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-user {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.btn-login {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--amber-dark);
+  text-decoration: none;
+}
+
+.btn-logout {
+  background: #FEF9C3;
+  color: var(--amber-dark);
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-logout:hover {
+  background: #FEF08A;
 }
