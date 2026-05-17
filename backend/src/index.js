@@ -23,6 +23,7 @@ app.use('/api/posts' , postsRouter)
 app.use('/api/auth' , authRouter)
 app.use('/api/posts/:postId/comments' , commentsRouter)
 app.use('/api/users', userRouter)
+
 connectDB().then(()=> {
   app.listen(PORT , () => {
     console.log(`Server is running on port ${PORT}`)
