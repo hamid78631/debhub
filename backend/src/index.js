@@ -6,7 +6,7 @@ const app= express()
 const PORT = process.env.PORT || 3001
 const authRouter = require('./routes/auth.routes')
 const commentsRouter = require("./routes/comments.routes")
-
+const userRouter = require('./routes/users.routes')
 app.use(express.json())
 app.use((req , res , next)=> {
 
@@ -22,6 +22,7 @@ app.use((req , res , next)=> {
 app.use('/api/posts' , postsRouter)
 app.use('/api/auth' , authRouter)
 app.use('/api/posts/:postId/comments' , commentsRouter)
+app.use('/api/users', userRouter)
 connectDB().then(()=> {
   app.listen(PORT , () => {
     console.log(`Server is running on port ${PORT}`)

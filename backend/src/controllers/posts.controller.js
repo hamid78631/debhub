@@ -16,7 +16,9 @@ async function getAllPosts( req , res){
 async function createPost(req, res){
     const post = await Post.create({
         title : req.body.title , 
-        author : req.body.author
+        author : req.body.author,
+        content : req.body.content, 
+        tags : req.body.tags || []
     })
     res.status(201).json(post)
 }
@@ -24,7 +26,7 @@ async function createPost(req, res){
 async function updatePost(req , res){
     const post = await Post.findByIdAndUpdate(
         req.params.id , 
-        {title : req.body.title , author : req.body.author},
+        {title : req.body.title , author : req.body.author , content : req.body.content , tags : req.body.tags || []},
         {new : true})
         if(!post){
             return res.status(404).json({error : "Post non trouvé"})

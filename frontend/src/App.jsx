@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import PostDetailPage from './pages/PostDetailPage'
 import './App.css'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
   const { user, logout } = useAuth()
@@ -41,6 +42,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/profile/:username" element={<ProfilePage />} />
       </Routes>
     </div>
   )

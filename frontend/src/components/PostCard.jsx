@@ -22,11 +22,19 @@ function PostCard({ post, onDelete, onEdit }) {
   return (
     <div className="post-card">
       <div className="post-card-header">
-        <span className="post-author">{post.author}</span>
+        <Link to={`/profile/${post.author}`} className="post-author">{post.author}</Link>
       </div>
       <Link to={`/posts/${post._id}`} className="post-title">
         {post.title}
       </Link>
+      {post.tags && post.tags.length > 0 && (
+  <div className="post-tags">
+    {post.tags.map(tag => (
+      <span key={tag} className="tag">#{tag}</span>
+    ))}
+  </div>
+)}
+
       <div className="post-footer">
         <button
           className={`btn-like ${alreadyLiked ? 'liked' : ''}`}
