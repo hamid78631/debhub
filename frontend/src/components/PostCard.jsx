@@ -55,4 +55,3 @@ function PostCard({ post, onDelete, onEdit }) {
 }
 
 export default PostCard
-this is a syntax error!!!
