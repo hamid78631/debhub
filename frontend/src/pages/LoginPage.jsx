@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useNavigate , Link} from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-const API = 'http://localhost:3001/api/auth'
+const API = import.meta.env.VITE_API_URL + '/auth'
 
 function LoginPage(){
     const [email , setEmail] = useState('')

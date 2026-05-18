@@ -2,7 +2,7 @@ import {useState , useEffect } from 'react'
 import {useParams}  from 'react-router-dom'
 import {useAuth}  from '../context/AuthContext'
 
-const API = 'http://localhost:3001/api'
+const API = import.meta.env.VITE_API_URL
 
 function PostDetailPage(){
     const {id } = useParams()

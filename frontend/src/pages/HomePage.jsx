@@ -3,7 +3,7 @@ import PostCard from '../components/PostCard'
 import PostForm from '../components/PostForm'
 import { useAuth } from '../context/AuthContext'
 
-const API = "http://localhost:3001/api/posts"
+const API = import.meta.env.VITE_API_URL + '/posts'
 
 function HomePage() {
   const [posts, setPosts] = useState([])

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useState } from 'react'
 
-const API = 'http://localhost:3001/api'
+const API = import.meta.env.VITE_API_URL
 
 function PostCard({ post, onDelete, onEdit }) {
   const { user, token } = useAuth()

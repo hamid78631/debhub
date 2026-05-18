@@ -1,7 +1,7 @@
 import {useState , useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 
-const API = "http://localhost:3001/api/posts"
+const API = import.meta.env.VITE_API_URL + '/posts'
 
 function PostPage(){
 const {id} = useParams()
